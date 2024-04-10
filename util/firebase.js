@@ -1,7 +1,7 @@
 // const firebase = require('firebase');
 //
 // const firebaseConfig = {
-//   apiKey: "AIzaSyB2OLpkPbiEoUjlunc9anld0QZTsmudK7w",
+//   apiKey: "",
 //   authDomain: "travelman-3fe85.firebaseapp.com",
 //   projectId: "travelman-3fe85",
 //   storageBucket: "travelman-3fe85.appspot.com",
