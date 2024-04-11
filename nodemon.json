@@ -1,7 +1,7 @@
 {
   "env": {
     "MONGO_ATLAS_PW": "Perfection081*",
-    "PORT": "3000",
+    "PORT": "5050",
     "USERNAME": "Greg Strydom"
   }
 }

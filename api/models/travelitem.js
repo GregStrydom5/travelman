@@ -1,33 +1,46 @@
-// const { db } = require('../../util/admin');
+const { db } = require('../../util/admin');
 
-// exports.books = async (req, res) => {
-//     const travelItemsRef = db.collection('TravelItems');
-//     try{
-//         travelItemsRef.get().then((snapshot) => {
-//             const data = snapshot.docs.map((doc) => ({
-//                 id: doc.id,
-//                 ...doc.data(),
-//             }));
-//             console.log(data);
-//             return res.status(201).json(data);
-//         })
-//     } catch (error) {
-//         return res
-//             .status(500)
-//             .json({ general: "Something went wrong, please try again"});
-//     }
-// };
+const getAllTravelItems = async (req, res) => {
+    const travelItemsRef = db.collection('travelItems');
+    try{
+        travelItemsRef.get().then((snapshot) => {
+            const data = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+            console.log(data);
+            return res.status(200).json(data);
+        })
+    } catch (error) {
+        return res
+            .status(500)
+            .json({ general: "Something went wrong, could not get travel item list. Please try again"});
+    }
+};
 
-const mongoose = require('mongoose')
+const getTravelItemById = async (req, res) => {
+    const travelItemRef = db.collection('travelItems').doc(req.params.id);
+    try{
+        travelItemRef.get().then((snapshot) => {
+            const data  = snapshot.data()
+            res.status(200).json(data);
+        })
+    } catch (error) {
+        return res
+            .status(500)
+            .json({ general: "Something went wrong, could not get travel item by ID. Please try again", error: error.message });
+    }
+}
 
-const travelItemSchema = mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
-    title: String,
-    date: Date,
-    startPlace: String,
-    endPlace: String,
-    timeTravelled: String,
-    distanceTravelled: String
-})
+const createTravelItem = async (req, res) => {
+    const travelItemsRef = db.collection('travelItems');
+}
 
-module.exports = mongoose.model('TravelItem', travelItemSchema)
+module.exports = {
+    // GET requests
+    getAllTravelItems,
+    getTravelItemById,
+
+    // POST requests
+    createTravelItem
+}
